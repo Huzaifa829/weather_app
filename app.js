@@ -13,8 +13,15 @@ Prompt_form.addEventListener("submit", async (e) => {
     e.preventDefault() // Prevent the default form submission behavior
     try {
         // Fetch the weather data from the API 
-    
-        const get_weather_data = await axios(`https://api.weatherapi.com/v1/current.json?key=7ae08629aaf54a1cacd151204242006&q=${Prompt_data_input.value}&aqi=no`)
+    // Create an instance of Axios with HTTPS baseURL
+const axiosInstance = axios.create({
+    baseURL: 'https://api.weatherapi.com/v1/',
+  });
+  
+  // Update your API request using the Axios instance
+  const get_weather_data = await axiosInstance.get(`current.json?key=7ae08629aaf54a1cacd151204242006&q=${Prompt_data_input.value}&aqi=no`);
+  
+        // const get_weather_data = await axios(`https://api.weatherapi.com/v1/current.json?key=7ae08629aaf54a1cacd151204242006&q=${Prompt_data_input.value}&aqi=no`)
 
         let location = get_weather_data.data.location
         let current = get_weather_data.data.current
